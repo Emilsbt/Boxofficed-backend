@@ -12,7 +12,15 @@ public class WatchlistController {
     @CrossOrigin
     @GetMapping("/")
     public List<WatchlistEntry> index() {
-        return List.of(new WatchlistEntry("M1"), new WatchlistEntry("M2"),
-                       new WatchlistEntry("M3"), new WatchlistEntry("M4"));
+    WatchlistEntry inception = new WatchlistEntry("Inception");
+    inception.setGenre("Sci-Fi");
+    inception.setRating(5);
+    inception.setWatched(true);
+
+    WatchlistEntry matrix = new WatchlistEntry("The Matrix");
+    matrix.setGenre("Action");
+    matrix.setRating(4);
+
+    return List.of(inception, matrix);
     }
 }
