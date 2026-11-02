@@ -1,26 +1,34 @@
 package de.htwberlin.webtech.boxofficed;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@CrossOrigin
 @RestController
 public class WatchlistController {
 
-    @CrossOrigin
-    @GetMapping("/")
-    public List<WatchlistEntry> index() {
-    WatchlistEntry inception = new WatchlistEntry("Inception");
-    inception.setGenre("Sci-Fi");
-    inception.setRating(5);
-    inception.setWatched(true);
+    @Autowired
+    WatchlistService service;
 
-    WatchlistEntry matrix = new WatchlistEntry("The Matrix");
-    matrix.setGenre("Action");
-    matrix.setRating(4);
+    @GetMapping("/watchlist")
+    public List<WatchlistEntry> getAllEntries() {
+        return service.getAll();
+    }
 
-    return List.of(inception, matrix);
+    @GetMapping("/watchlist/{id}")
+    public WatchlistEntry getEntry(@PathVariable Long id) {
+        return service.get(id);
+    }
+
+    @PostMapping("/watchlist")
+    public WatchlistEntry createEntry(@RequestBody WatchlistEntry entry) {
+        return service.save(entry);
     }
 }

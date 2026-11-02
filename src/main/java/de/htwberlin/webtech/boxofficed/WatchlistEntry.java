@@ -1,25 +1,36 @@
 package de.htwberlin.webtech.boxofficed;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class WatchlistEntry {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    private int id;
     private boolean watched;
     private String genre;
     private int rating;
     private String reviewText;
 
+    public WatchlistEntry() {}
+
     public WatchlistEntry(String name) {
         this.name = name;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
-                                                                    
+
     public String getName() {
         return name;
     }
@@ -44,7 +55,7 @@ public class WatchlistEntry {
         this.genre = genre;
     }
 
-     public int getRating() {
+    public int getRating() {
         return rating;
     }
 
@@ -59,6 +70,4 @@ public class WatchlistEntry {
     public void setReviewText(String reviewText) {
         this.reviewText = reviewText;
     }
-    
-    
 }
